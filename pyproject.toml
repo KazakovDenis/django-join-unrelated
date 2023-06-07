@@ -1,0 +1,78 @@
+[tool.poetry]
+name = "django-join-unrelated"
+version = "0.1.0.dev1"
+description = "Join Django ORM models having no relations."
+authors = ["Denis Kazakov <denis@kazakov.ru.net>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://pypi.org/project/django-join-unrelated"
+repository = "https://github.com/KazakovDenis/django-join-unrelated"
+keywords = ["django", "django-orm", "orm"]
+classifiers = [
+    "Framework :: Django",
+    "Intended Audience :: Developers",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+
+[tool.poetry.dev-dependencies]
+Django = "^3.2"
+coverage = {extras = ["toml"], version = "^7.2.2"}
+flake8 = "^5"
+isort = "^5.11"
+mypy = "^1.1.1"
+pyproject-flake8 = "^5"
+pytest = "^7"
+django-stubs = "^4.2.1"
+
+[build-system]
+requires = ["poetry-core<1.2.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+branch = true
+command_line = "-m pytest"
+source = ["django_join_unrelated"]
+omit = ["*/tests/*"]
+
+[tool.coverage.report]
+fail_under = 80
+show_missing = true
+sort = "Stmts"
+omit = ["*/tests/*"]
+
+[tool.flake8]
+max-line-length = 120
+max-complexity = 10
+exclude = [
+    ".git",
+    ".idea",
+    ".pytest_cache",
+    ".mypy_cache",
+    "__pycache__"
+]
+max-cognitive-complexity = 10
+min-python-version = 3.7
+per-file-ignores = [
+    "django_join_unrelated/__init__.py:F401"
+]
+pytest-fixture-no-parentheses = true
+pytest-parametrize-names-type = "csv"
+
+[tool.isort]
+multi_line_output = 3
+lines_after_imports = 2
+lines_between_sections = 1
+line_length = 120
+use_parentheses = true
+include_trailing_comma = true
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+known_first_party = ["django_join_unrelated"]
+
+[tool.mypy]
+python_version = "3.8"
+warn_unused_configs = true
+files = ["django_join_unrelated"]

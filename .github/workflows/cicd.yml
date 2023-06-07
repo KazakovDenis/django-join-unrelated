@@ -1,0 +1,32 @@
+name: CI/CD
+
+run-name: ${{ github.actor }} pushed changes
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  CI:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ "3.8", "3.9", "3.10", "3.11" ]
+        poetry-version: [ "1.1" ]
+        os: [ ubuntu-latest ]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      - uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: ${{ matrix.poetry-version }}
+      - name: Install dependencies
+        run: poetry install --no-cache
+      - name: Run linters
+        run: make style

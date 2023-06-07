@@ -1,0 +1,2 @@
+class JoinError(Exception):
+    pass
