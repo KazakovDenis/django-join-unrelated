@@ -30,9 +30,9 @@ class JoinQuery(Query):
         return comp
 
 
-class JoinQuerySet(QuerySet):
+class UnrelatedJoinQuerySet(QuerySet):
 
-    def join(self, join_type=INNER, nullable=False, **join_fields) -> 'JoinQuerySet':
+    def join(self, join_type=INNER, nullable=False, **join_fields) -> 'UnrelatedJoinQuerySet':
         # can't be joined on itself
         # for FK use *_id field: id=Person.department_id
         for v in join_fields.values():

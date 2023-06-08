@@ -1,7 +1,7 @@
 from django.db.models import Manager
 
-from .query import JoinQuerySet
+from .query import UnrelatedJoinQuerySet
 
 
-class JoinManager(Manager.from_queryset(JoinQuerySet)):  # type: ignore[misc]
+class UnrelatedJoinManager(Manager.from_queryset(UnrelatedJoinQuerySet)):  # type: ignore[misc]
     pass

@@ -1,1 +1,1 @@
-from .manager import JoinManager, JoinQuerySet
+from .manager import UnrelatedJoinQuerySet, UnrelatedJoinManager
