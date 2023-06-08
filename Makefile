@@ -3,6 +3,9 @@ style:
 	poetry run pflake8
 	poetry run mypy
 
+migrate:
+	python manage.py migrate
+
 test:
 	poetry run coverage run
 	poetry run coverage report

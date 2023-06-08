@@ -76,9 +76,13 @@ WSGI_APPLICATION = 'join_unrelated.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql',
+        'HOST': 'localhost',
+        'PORT': '5432',
+        'NAME': 'django_join_unrelated',
+        'USER': 'django_join_unrelated',
+        'PASSWORD': 'django_join_unrelated',
+    },
 }
 
 

@@ -185,6 +185,14 @@ dev = ["pre-commit", "tox"]
 testing = ["pytest", "pytest-benchmark"]
 
 [[package]]
+name = "psycopg2-binary"
+version = "2.9.6"
+description = "psycopg2 - Python-PostgreSQL Database Adapter"
+category = "dev"
+optional = false
+python-versions = ">=3.6"
+
+[[package]]
 name = "pycodestyle"
 version = "2.9.1"
 description = "Python style guide checker"
@@ -287,7 +295,7 @@ python-versions = ">=3.7"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "5fd1025fd51353a57980cbef2a5f69805db2ec5b834f4e283b5bc4c70b9ea6ba"
+content-hash = "d3d0707cafa0ae39331bb042d4d5a050a3b43255f6bd6c1c0db6c63ca5243c8c"
 
 [metadata.files]
 asgiref = []
@@ -305,6 +313,7 @@ mypy = []
 mypy-extensions = []
 packaging = []
 pluggy = []
+psycopg2-binary = []
 pycodestyle = []
 pyflakes = []
 pyproject-flake8 = []

@@ -18,6 +18,17 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
+    services:
+      postgres:
+        image: bitnami/postgresql:15
+        env:
+          POSTGRESQL_DATABASE: django_join_unrelated
+          POSTGRESQL_USERNAME: django_join_unrelated
+          POSTGRESQL_PASSWORD: django_join_unrelated
+          POSTGRESQL_POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
+
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
@@ -30,3 +41,7 @@ jobs:
         run: poetry install --no-cache
       - name: Run linters
         run: make style
+      - name: Apply migrations
+        run: make migrate
+      - name: Run tests
+        run: make test
