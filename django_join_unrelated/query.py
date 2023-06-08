@@ -4,12 +4,12 @@ from django.db.models import Field, Model, QuerySet
 from django.db.models.sql import Query
 from django.db.models.sql.constants import INNER
 
-from .compiler import SQLJoinCompiler
+from .compiler import SQLUnrelatedJoinCompiler
 from .exception import JoinError
 
 
 class JoinQuery(Query):
-    compiler = 'SQLJoinCompiler'
+    compiler = 'SQLUnrelatedJoinCompiler'
     alias_prefix = 'J'
 
     def __init__(self, model: Optional[Type[Model]], alias_cols: bool = True):
@@ -23,8 +23,8 @@ class JoinQuery(Query):
         self._join_nullable = nullable
         self._join_fields = join_fields
 
-    def get_compiler(self, *args, **kwargs) -> SQLJoinCompiler:
-        comp: SQLJoinCompiler = super().get_compiler(*args, **kwargs)  # type: ignore[assignment]
+    def get_compiler(self, *args, **kwargs) -> SQLUnrelatedJoinCompiler:
+        comp: SQLUnrelatedJoinCompiler = super().get_compiler(*args, **kwargs)  # type: ignore[assignment]
         if self._join_fields:
             comp.setup_unrelated_joins(join_type=self._join_type, nullable=self._join_nullable, **self._join_fields)
         return comp

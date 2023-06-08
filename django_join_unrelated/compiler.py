@@ -20,7 +20,7 @@ class JoinField:
         pass
 
 
-class SQLJoinCompiler(SQLCompiler):
+class SQLUnrelatedJoinCompiler(SQLCompiler):
     join_cls = Join
 
     def setup_unrelated_joins(self, join_type: str = INNER, nullable: bool = False, **join_fields) -> None:
@@ -43,4 +43,4 @@ class SQLJoinCompiler(SQLCompiler):
             self.query.alias_refcount[alias] = 1
 
 
-setattr(compiler, 'SQLJoinCompiler', SQLJoinCompiler)
+setattr(compiler, 'SQLUnrelatedJoinCompiler', SQLUnrelatedJoinCompiler)
