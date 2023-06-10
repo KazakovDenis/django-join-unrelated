@@ -1,2 +1,2 @@
-# 0.1.0.dev1
-- basic join implementation
+# 0.1.0
+- basic join implementation with filtering

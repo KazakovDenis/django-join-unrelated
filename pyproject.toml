@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-join-unrelated"
-version = "0.1.0.dev1"
+version = "0.1.0"
 description = "Join Django ORM models having no relations."
 authors = ["Denis Kazakov <denis@kazakov.ru.net>"]
 license = "MIT"
