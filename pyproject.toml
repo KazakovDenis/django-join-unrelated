@@ -20,14 +20,32 @@ python = "^3.8"
 
 [tool.poetry.dev-dependencies]
 Django = "^3.2"
-coverage = {extras = ["toml"], version = "^7.2.2"}
+django-stubs = "^4"
+coverage = {extras = ["toml"], version = "^7"}
 flake8 = "^5"
-isort = "^5.11"
-mypy = "^1.1.1"
+flake8-annotations-complexity = "^0"
+flake8-broken-line = "^1"
+flake8-builtins = "^2"
+flake8-cognitive-complexity = "^0"
+flake8-commas = "^2"
+flake8-comprehensions = "^3"
+flake8-eradicate = "^1"
+flake8-expression-complexity = "^0"
+flake8-fixme = "^1"
+flake8-print = "^5"
+flake8-pytest = "^1"
+flake8-pytest-style = "^1"
+flake8-quotes = "^3"
+flake8-return = "^1"
+flake8_simplify = "^0"
+flake8-typing-imports = "^1"
+flake8-variables-names = "^0"
+isort = "^5"
+mypy = "^1"
+psycopg2-binary = "<=3"
 pyproject-flake8 = "^5"
 pytest = "^7"
-django-stubs = "^4.2.1"
-psycopg2-binary = "<=3"
+pytest-django = "^4"
 
 [build-system]
 requires = ["poetry-core<1.2.0"]
@@ -46,6 +64,7 @@ sort = "Stmts"
 omit = ["*/tests/*"]
 
 [tool.flake8]
+min-python-version = 3.8
 max-line-length = 120
 max-complexity = 10
 exclude = [
@@ -56,7 +75,6 @@ exclude = [
     "__pycache__"
 ]
 max-cognitive-complexity = 10
-min-python-version = 3.7
 per-file-ignores = [
     "django_join_unrelated/__init__.py:F401"
 ]
@@ -71,9 +89,16 @@ line_length = 120
 use_parentheses = true
 include_trailing_comma = true
 sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
-known_first_party = ["django_join_unrelated", "tests"]
+known_first_party = ["django_join_unrelated", "app", "tests"]
 
 [tool.mypy]
 python_version = "3.8"
 warn_unused_configs = true
 files = ["django_join_unrelated"]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "app.settings"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "app.settings"

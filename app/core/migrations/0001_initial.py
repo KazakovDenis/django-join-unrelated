@@ -17,22 +17,22 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('first_name', models.CharField(max_length=128, verbose_name='First name')),
                 ('last_name', models.CharField(max_length=128, verbose_name='Last name')),
-                ('salary', models.PositiveIntegerField(verbose_name='Salary')),
+                ('birth_place', models.CharField(max_length=128, verbose_name='Birth place')),
             ],
             options={
                 'verbose_name': 'Person',
             },
         ),
         migrations.CreateModel(
-            name='User',
+            name='Jedi',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('first_name', models.CharField(max_length=128, verbose_name='First name')),
                 ('last_name', models.CharField(max_length=128, verbose_name='Last name')),
-                ('birth_date', models.DateTimeField(verbose_name='Birth date')),
+                ('force', models.IntegerField(verbose_name='Force')),
             ],
             options={
-                'verbose_name': 'User',
+                'verbose_name': 'Jedi',
             },
         ),
     ]

@@ -16,7 +16,7 @@ class JoinField:
     def get_joining_columns(self) -> List[List[str]]:
         return [self._joining_columns]
 
-    def get_extra_restriction(self, alias: str, remote_alias: str) -> None:
+    def get_extra_restriction(self, alias: str, remote_alias: str, *args, **kwargs) -> None:
         pass
 
 

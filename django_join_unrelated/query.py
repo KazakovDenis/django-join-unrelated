@@ -35,8 +35,8 @@ class UnrelatedJoinQuerySet(QuerySet):
     def join(self, join_type=INNER, nullable=False, **join_fields) -> 'UnrelatedJoinQuerySet':
         # can't be joined on itself
         # for FK use *_id field: id=Person.department_id
-        for v in join_fields.values():
-            if v.field.model == self.model:
+        for i in join_fields.values():
+            if i.field.model == self.model:
                 raise JoinError('Unable to join on the same model.')
 
         self.query: JoinQuery = self.query.chain(JoinQuery)  # type: ignore[assignment]
