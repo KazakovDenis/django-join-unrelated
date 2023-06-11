@@ -1,3 +1,4 @@
+from collections import defaultdict
 from typing import List
 
 from django.db.models.sql import compiler
@@ -13,8 +14,8 @@ class JoinField:
     def __init__(self, columns: List[str]):
         self._joining_columns = columns
 
-    def get_joining_columns(self) -> List[List[str]]:
-        return [self._joining_columns]
+    def get_joining_columns(self) -> List[str]:
+        return self._joining_columns
 
     def get_extra_restriction(self, alias: str, remote_alias: str, *args, **kwargs) -> None:
         pass
@@ -29,14 +30,19 @@ class SQLUnrelatedJoinCompiler(SQLCompiler):
         if not self.query.model:
             raise JoinError('Unable to setup joins with no parent model.')
 
+        tables = defaultdict(list)
+
         for from_field, to_field in join_fields.items():
             alias = to_field.field.model._meta.db_table
+            tables[alias].append((from_field, to_field.field.column))
+
+        for alias, fields in tables.items():
             join = self.join_cls(
                 table_name=alias,
                 parent_alias=self.query.model._meta.db_table,
                 table_alias=alias,
                 join_type=join_type,
-                join_field=JoinField([from_field, to_field.field.column]),  # type: ignore[arg-type]
+                join_field=JoinField(fields),  # type: ignore[arg-type]
                 nullable=nullable,
             )
             self.query.alias_map[alias] = join

@@ -23,15 +23,29 @@ Jedi.objects.join(first_name=Person.first_name).values_list('first_name')
 
 print(Jedi.objects.join(first_name=Person.first_name).values_list('first_name').query)
 # SELECT "core_jedi"."first_name" FROM "core_jedi" INNER JOIN core_person ON ("core_jedi"."first_name" = core_person."first_name")
+
+# Set join type explicitly
+from django_join_unrelated import JoinType
+
+Jedi.objects.join(first_name=Person.first_name, join_type=JoinType.FULL)
+
+# Join on multiple fields
+Jedi.objects.join(first_name=Person.first_name, last_name=Person.last_name)
+
+# Join multiple models
+Jedi.objects.join(first_name=Person.first_name, id=User.id)
 ```
 
 `django-join-unrelated` tries to keep all QuerySet power where it is possible:
 ```python
 Jedi.objects.join(first_name=Person.first_name).filter(last_name='Kenobi')
-# <UnrelatedJoinQuerySet [<Jedi: Jedi object (1)>]>
+# <UnrelatedJoinQuerySet [<Jedi: Obi-Wan Kenobi>]>
 
-Jedi.objects.join(first_name=Person.first_name).filter(last_name='Windu')
-# <UnrelatedJoinQuerySet []>
+Jedi.objects.join(first_name=Person.first_name).annotate(name=F('first_name'))[0].name
+# 'Obi-Wan'
+
+Jedi.objects.join(first_name=Person.first_name).aggregate(Sum('force'))
+# {'force__sum': 100}
 ```
 
 ## Installation
@@ -58,3 +72,10 @@ class Jedi(models.Model):
     class Meta:
         verbose_name = 'Jedi'
 ```
+  
+**Already implemented:**
+- filtering via joins
+
+**Not implemented yet but planned:**
+- unrelated objects selection
+- return of joined values

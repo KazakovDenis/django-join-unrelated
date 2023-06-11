@@ -11,6 +11,9 @@ class Person(models.Model):
     class Meta:
         verbose_name = 'Person'
 
+    def __str__(self):
+        return '%s %s' % (self.first_name, self.last_name)
+
 
 class Jedi(models.Model):
     first_name = models.CharField('First name', max_length=128)
@@ -21,3 +24,6 @@ class Jedi(models.Model):
 
     class Meta:
         verbose_name = 'Jedi'
+
+    def __str__(self):
+        return '%s %s' % (self.first_name, self.last_name)

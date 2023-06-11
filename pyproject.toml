@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "django-join-unrelated"
-version = "0.1.0"
-description = "Join Django ORM models having no relations."
+version = "0.2.0"
+description = "Use SQL Join with Django ORM models having no relations."
 authors = ["Denis Kazakov <denis@kazakov.ru.net>"]
 license = "MIT"
 readme = "README.md"
@@ -58,7 +58,7 @@ source = ["django_join_unrelated"]
 omit = ["*/tests/*"]
 
 [tool.coverage.report]
-fail_under = 0
+fail_under = 90
 show_missing = true
 sort = "Stmts"
 omit = ["*/tests/*"]
